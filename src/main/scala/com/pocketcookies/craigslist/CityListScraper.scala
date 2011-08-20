@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.File;
 import org.jsoup.Jsoup;
 import scala.collection.JavaConversions._;
+import scala.xml.PrettyPrinter;
 
 /**
  * @author John Edmonds
@@ -44,7 +45,9 @@ object CityListScraper {
       })
     }
     </continents>
-    out.write(xml.toString().getBytes())
+    val sb = new StringBuilder();
+    new PrettyPrinter(1000, 1).format(xml,sb)
+    out.write(sb.toString().getBytes())
     out.flush()
     out.close()
   }
